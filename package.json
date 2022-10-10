@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel --open firefox",
     "build": "parcel build",
-    "scss-build": "node-sass scss -o ./src/"
+    "scss-build": "node-sass scss -o ./src/css"
   },
   "keywords": [],
   "author": "",
