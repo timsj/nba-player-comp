@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+//Import a Google Font
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap");
+
+// Set your brand colors
+$bkg-color-dark: #4f5858;
+$bkg-color-darker: #343d3d;
+$basketball: #dc8c00;
+$green-dark: #00603599;
+$red-dark: #72001999;
+$whitesmoke: #f5f5f5;
+
+// Update Bulma's global variables
+$family-sans-serif: "Titillium Web", sans-serif;
+$info: $bkg-color-darker;
+$text: $whitesmoke;
+$text-light: $whitesmoke;
+$text-strong: $whitesmoke;
+$success: $green-dark;
+$danger: $red-dark;
+$white-ter: grey;
+
+// Update some of Bulma's component variables
+$body-background-color: $bkg-color-dark;
+
+$input-background-color: $bkg-color-dark;
+$input-hover-border-color: $basketball;
+$input-focus-border-color: $basketball;
+
+$dropdown-content-background-color: $bkg-color-darker;
+$dropdown-item-color: $whitesmoke;
+$dropdown-item-hover-color: $bkg-color-darker;
+$dropdown-item-hover-background-color: $basketball;
+
+// Import Bulma
+@import "../node_modules/bulma/bulma.sass";

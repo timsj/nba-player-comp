@@ -1,0 +1,21 @@
+{
+  "name": "nbaplayercompdark",
+  "version": "1.0.0",
+  "description": "",
+  "source": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "parcel --open firefox",
+    "build": "parcel build",
+    "scss-build": "node-sass scss -o ./src/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "node-sass": "^7.0.1",
+    "parcel": "^2.7.0"
+  },
+  "browserslist": "defaults"
+}

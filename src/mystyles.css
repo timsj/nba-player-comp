@@ -1,0 +1,84 @@
+@charset "utf-8";
+@import "darkstyles.css" (prefers-color-scheme: dark);
+@import "lightstyles.css" (prefers-color-scheme: light);
+
+.tutorial {
+  width: 600px;
+  text-align: center;
+  margin: auto;
+}
+
+figure.image {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+figure .image img {
+  width: 200px;
+}
+
+.notification {
+  margin-top: 20px !important;
+}
+
+.results {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.title .icon {
+  margin-left: 15px;
+}
+
+.hero {
+  margin-bottom: 20px;
+}
+
+.forms {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.dropdown-item img {
+  height: 0px;
+  margin-right: 0px;
+}
+
+.input {
+  display: flex;
+}
+
+.content h4 {
+  margin-bottom: 0.5rem !important;
+}
+
+.content p {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 0 !important;
+}
+
+.icon {
+  margin-left: 5px;
+}
+
+.column {
+  margin: 0 auto;
+  max-width: 45%;
+}
+
+.notification {
+  margin: 0 auto;
+}
+
+.team {
+  font-weight: 600;
+}
