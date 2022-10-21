@@ -151,6 +151,9 @@ const runComparison = () => {
 let nbaID;
 let nbaDOB;
 let nbaJerseyNo;
+let nbaHeightFt;
+let nbaHeightIn;
+let nbaWeight;
 
 const playerTemplate = (bdlPlayerDetail, bdlPlayerStats, nbaPlayerDetail) => {
   //use regex to convert mpg to float
@@ -165,6 +168,9 @@ const playerTemplate = (bdlPlayerDetail, bdlPlayerStats, nbaPlayerDetail) => {
       nbaID = nbaPlayerDetail[i].personId;
       nbaDOB = nbaPlayerDetail[i].dateOfBirthUTC;
       nbaJerseyNo = nbaPlayerDetail[i].jersey;
+      nbaHeightFt = nbaPlayerDetail[i].heightFeet;
+      nbaHeightIn = nbaPlayerDetail[i].heightInches;
+      nbaWeight = nbaPlayerDetail[i].weightPounds;
     }
   }
 
@@ -184,8 +190,8 @@ const playerTemplate = (bdlPlayerDetail, bdlPlayerStats, nbaPlayerDetail) => {
           </span>
         </p>
           <p>#${nbaJerseyNo} | ${bdlPlayerDetail.position}</p>
-          <p>${bdlPlayerDetail.height_feet}'-${bdlPlayerDetail.height_inches}",
-          ${bdlPlayerDetail.weight_pounds} lbs</p>
+          <p>${nbaHeightFt}'-${nbaHeightIn}",
+          ${nbaWeight} lbs</p>
           <p>DOB: ${nbaDOB}</>
         </div>
       </div>
