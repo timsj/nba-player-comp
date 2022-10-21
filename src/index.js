@@ -45,6 +45,15 @@ createAutoComplete({
   },
 });
 
+//get current and last year for instructions and API requests
+const currentYear = new Date().getFullYear();
+const lastYear = currentYear - 1;
+
+//show instructions on initial page load
+document.getElementById(
+  "season"
+).innerHTML = `to compare their ${lastYear}-${currentYear} NBA regular season averages`;
+
 //initialize left and rightPlayer variables
 let leftPlayer;
 let rightPlayer;
@@ -56,14 +65,14 @@ const onPlayerSelect = async (player, summaryElement, side) => {
     `https://www.balldontlie.io/api/v1/players/${player.id}`
   );
 
-  //retrieve balldonlie.io player season averages
+  //retrieve balldonlie.io player season averages (only returns stats on last full year)
   const bdlStatsResponse = await axios.get(
-    `https://www.balldontlie.io/api/v1/season_averages?player_ids[]=${player.id}`
+    `https://www.balldontlie.io/api/v1/season_averages?season=${lastYear}&player_ids[]=${player.id}`
   );
 
   //retrieve current list of NBA players from NBA API
   const nbaResponse = await axios.get(
-    "https://data.nba.net/data/10s/prod/v1/2022/players.json"
+    `https://data.nba.net/data/10s/prod/v1/${lastYear}/players.json`
   );
 
   //check for active player selection
@@ -71,7 +80,7 @@ const onPlayerSelect = async (player, summaryElement, side) => {
     summaryElement.innerHTML = `
     <article class="notification is-danger">
       <p class="title">Uh oh!</p>
-      <p class="subtitle">Please select an active player.</p>
+      <p class="subtitle">Please select a player who played in the ${lastYear}-${currentYear} NBA season.</p>
     </article>
     `;
   } else {
@@ -165,15 +174,15 @@ const playerTemplate = (bdlPlayerDetail, bdlPlayerStats, nbaPlayerDetail) => {
       <div class="media-content">
         <div class="content">
           <h4>${bdlPlayerDetail.first_name} ${bdlPlayerDetail.last_name}</h4>
+          <p class="team">${bdlPlayerDetail.team.full_name} 
+          <span class="icon is-medium">
+            <img src="https://www.nba.com/.element/img/1.0/teamsites/logos/teamlogos_500x500/${bdlPlayerDetail.team.abbreviation.toLowerCase()}.png"></i>
+          </span>
+        </p>
           <p>#${nbaJerseyNo} | ${bdlPlayerDetail.position}</p>
           <p>${bdlPlayerDetail.height_feet}'-${bdlPlayerDetail.height_inches}",
           ${bdlPlayerDetail.weight_pounds} lbs</p>
           <p>DOB: ${nbaDOB}</>
-          <p class="team">${bdlPlayerDetail.team.full_name} 
-            <span class="icon is-medium">
-              <img src="https://www.nba.com/.element/img/1.0/teamsites/logos/teamlogos_500x500/${bdlPlayerDetail.team.abbreviation.toLowerCase()}.png"></i>
-            </span>
-          </p>
         </div>
       </div>
       </article>
