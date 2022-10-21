@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createAutoComplete } from "./autoComplete";
 
 //initialize autocomplete search options
