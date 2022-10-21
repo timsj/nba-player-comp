@@ -82,3 +82,8 @@ figure .image img {
 .team {
   font-weight: 600;
 }
+
+/* normalize placeholder opacity */
+::placeholder {
+  opacity: 0.54;
+}

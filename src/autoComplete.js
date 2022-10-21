@@ -18,8 +18,7 @@ export const createAutoComplete = ({
   fetchData,
 }) => {
   root.innerHTML = `
-    <label><b>Search:</b></label>
-    <input class="input" />
+    <input type="search" class="input" onfocus="this.value=''" placeholder="&#128269;&nbsp&nbsp;Search for a player here"/>
     <div class="dropdown">
         <div class="dropdown-menu">
             <div class="dropdown-content results"></div>
@@ -32,27 +31,38 @@ export const createAutoComplete = ({
   const resultsWrapper = root.querySelector(".results");
 
   const onInput = async (event) => {
-    const items = await fetchData(event.target.value);
+    //initialize search results array variable
+    let results;
 
-    if (!items.length) {
-      dropdown.classList.remove("is-active"); //if search result array is empty, deactivate dropdown
-      return; //exit out of entire onInput function
+    //if input is not empty, fetch data and save to results
+    if (input.value) {
+      results = await fetchData(event.target.value);
     }
 
-    resultsWrapper.innerHTML = ""; //clears previous results on new search results
-    dropdown.classList.add("is-active");
-    for (let item of items) {
-      const option = document.createElement("a");
+    if (results) {
+      if (!results.length) {
+        dropdown.classList.remove("is-active"); //if search result array is empty, deactivate dropdown
+        return; //exit out of entire onInput function
+      }
 
-      option.classList.add("dropdown-item");
-      option.innerHTML = renderOption(item);
-      option.addEventListener("click", () => {
-        dropdown.classList.remove("is-active");
-        input.value = inputValue(item);
-        onOptionSelect(item);
-      });
+      resultsWrapper.innerHTML = ""; //clears previous results on new search results
+      dropdown.classList.add("is-active");
 
-      resultsWrapper.appendChild(option);
+      for (let result of results) {
+        const option = document.createElement("a");
+        option.classList.add("dropdown-item");
+        option.innerHTML = renderOption(result);
+        option.addEventListener("click", () => {
+          dropdown.classList.remove("is-active");
+          input.value = inputValue(result);
+          onOptionSelect(result);
+        });
+
+        resultsWrapper.appendChild(option);
+      }
+    } else {
+      dropdown.classList.remove("is-active"); //if search input is empty, deactivate dropdown
+      return; //exit out of entire onInput function
     }
   };
 
