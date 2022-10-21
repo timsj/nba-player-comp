@@ -47,13 +47,16 @@ createAutoComplete({
 });
 
 //get current and last year for instructions and API requests
-const currentYear = new Date().getFullYear();
+const date = new Date();
+let currentYear = date.getFullYear(); //current calendar year; can be used from mid-April (end of NBA reg. season) thru Dec
+if (date.getMonth() < 3 || (date.getMonth() === 3 && date.getDate() < 15))
+  currentYear--; //use previous calendar year from Jan thru mid-April (end of NBA reg. season)
 const lastYear = currentYear - 1;
 
 //show instructions on initial page load
 document.getElementById(
   "season"
-).innerHTML = `to compare their ${lastYear}-${currentYear} NBA regular season averages`;
+).innerText = `to compare their latest complete regular season averages (${lastYear}-${currentYear} NBA season)`;
 
 //initialize left and rightPlayer variables
 let leftPlayer;
