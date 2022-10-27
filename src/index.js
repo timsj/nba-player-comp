@@ -196,6 +196,12 @@ const playerTemplate = (bdlPlayerDetail, bdlPlayerStats, nbaPlayerDetail) => {
         </div>
       </div>
       </article>
+      <article data-value=${
+        bdlPlayerStats.games_played
+      } class="notification is-success">
+        <p class="title">${bdlPlayerStats.games_played}</p>
+        <p class="subtitle">Games Played</p>
+      </article>
       <article data-value=${mpg} class="notification is-success">
         <p class="title">${bdlPlayerStats.min}</p>
         <p class="subtitle">Minutes Per Game</p>
