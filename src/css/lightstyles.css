@@ -2328,7 +2328,7 @@ a.tag:hover {
   .checkbox input, .radio input {
     cursor: pointer; }
   .checkbox:hover, .radio:hover {
-    color: #363636; }
+    color: #dc8c00; }
   .checkbox[disabled], .radio[disabled],
   fieldset[disabled] .checkbox,
   fieldset[disabled] .radio,
@@ -2348,7 +2348,7 @@ a.tag:hover {
   .select:not(.is-multiple) {
     height: 2.5em; }
   .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: #485fc7;
+    border-color: rgba(54, 54, 54, 0.54);
     right: 1.125em;
     z-index: 4; }
   .select.is-rounded select {
@@ -2373,7 +2373,7 @@ a.tag:hover {
       .select select[multiple] option {
         padding: 0.5em 1em; }
   .select:not(.is-multiple):not(.is-loading):hover::after {
-    border-color: #363636; }
+    border-color: #dc8c00; }
   .select.is-white:not(:hover)::after {
     border-color: white; }
   .select.is-white select {

@@ -28,18 +28,34 @@
     <section class="hero is-info">
       <div class="hero-body">
         <div class="container">
-          <p class="title">
-            <span class="icon">
-              <i class="fa-solid fa-basketball"></i>
-            </span>
-            &nbsp;NBA Player Comparison
-          </p>
-          <p class="subtitle">
-            <span class="icon">
-              <i class="fa-solid fa-chart-line"></i>
-            </span>
-            &nbsp;data courtesy of balldontlie.io and data.nba.net APIs
-          </p>
+          <div class="columns">
+            <div class="column">
+              <p class="title is-4">
+                <span class="icon">
+                  <i class="fa-solid fa-basketball"></i>
+                </span>
+                &nbsp;NBA Player Comparison
+              </p>
+              <p class="subtitle is-6">
+                <span class="icon">
+                  <i class="fa-solid fa-chart-line"></i>
+                </span>
+                &nbsp;data courtesy of balldontlie.io and data.nba.net APIs
+              </p>
+            </div>
+            <div class="column">
+              <div class="select-label">
+                <label for="years">Select season:</label>
+              </div>
+              <div class="level">
+                <div class="level-item has-text-centered">
+                  <div class="select">
+                    <select name="years" id="years"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -57,8 +73,8 @@
       </div>
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <div class="column is-half notification is-info tutorial">
-        <h1 class="title">Search for two active players</h1>
-        <p class="subtitle" id="season"></p>
+        <h1 class="title is-4">Search for two active players</h1>
+        <p class="subtitle is-6" id="season"></p>
       </div>
     </div>
     <script type="module" src="src/index.js"></script>

@@ -13,11 +13,13 @@ $family-sans-serif: "Titillium Web", sans-serif;
 $info: $basketball;
 $success: $green-light;
 $danger: $red-light;
-$input-placeholder-color: #363636;
 
 // Update some of Bulma's component variables
+$input-placeholder-color: #363636;
+$input-arrow: rgba(54, 54, 54, 0.54);
 $input-hover-border-color: $basketball;
 $input-focus-border-color: $basketball;
+$input-hover-color: $basketball;
 
 // Import Bulma
 @import "../node_modules/bulma/bulma.sass";

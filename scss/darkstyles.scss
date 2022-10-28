@@ -17,7 +17,6 @@ $info: $bkg-color-darker;
 $text: $whitesmoke;
 $text-light: $whitesmoke;
 $text-strong: $whitesmoke;
-$input-placeholder-color: $whitesmoke;
 $success: $green-dark;
 $danger: $red-dark;
 $white-ter: grey;
@@ -25,9 +24,12 @@ $white-ter: grey;
 // Update some of Bulma's component variables
 $body-background-color: $bkg-color-dark;
 
+$input-placeholder-color: $whitesmoke;
+$input-arrow: $whitesmoke;
 $input-background-color: $bkg-color-dark;
 $input-hover-border-color: $basketball;
 $input-focus-border-color: $basketball;
+$input-hover-color: $basketball;
 
 $dropdown-content-background-color: $bkg-color-darker;
 $dropdown-item-color: $whitesmoke;

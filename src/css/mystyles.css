@@ -2,6 +2,10 @@
 @import "darkstyles.css" (prefers-color-scheme: dark);
 @import "lightstyles.css" (prefers-color-scheme: light);
 
+body {
+  transition: 0.3s ease-in-out all;
+}
+
 .tutorial {
   width: 600px;
   text-align: center;
@@ -46,11 +50,6 @@ figure .image img {
   height: 40px;
 }
 
-.dropdown-item img {
-  height: 0px;
-  margin-right: 0px;
-}
-
 .input {
   display: flex;
 }
@@ -75,12 +74,15 @@ figure .image img {
   max-width: 45%;
 }
 
-.notification {
-  margin: 0 auto;
-}
-
 .team {
   font-weight: 600;
+}
+
+.select-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
 }
 
 /* normalize placeholder opacity */
