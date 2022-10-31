@@ -85,6 +85,15 @@ figure .image img {
   margin-bottom: 0.25rem;
 }
 
+p.header {
+  display: flex;
+  align-items: center;
+}
+
+p.header span {
+  margin-left: 0 !important;
+}
+
 /* normalize placeholder opacity */
 ::placeholder {
   opacity: 0.54;
