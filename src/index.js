@@ -10,9 +10,13 @@ import {
 //initialize autocomplete search options
 const autoCompleteConfig = {
   renderOption(player) {
-    return `
+    if (player.error) {
+      return `${player.error}`;
+    } else {
+      return `
       ${player.first_name} ${player.last_name}
     `;
+    }
   },
   inputValue(player) {
     return `${player.first_name} ${player.last_name}`;
@@ -147,8 +151,16 @@ const onPlayerSelect = async (
   //year does not matter since team codes stay the same
   const nbaTeams = await nbaTeamsFetch();
 
-  //check for active player selection
-  if (!bdlStats.data.data.length) {
+  if (!bdlPlayer || !bdlStats) {
+    //check if data from balldontlie.io is available
+    summaryElement.innerHTML = `
+    <article class="notification is-danger">
+      <p class="title">Uh oh!</p>
+      <p class="subtitle">There was an error retrieving player data from the balldontlie.io servers. Please try again later.</p>
+    </article>
+    `;
+  } else if (!bdlStats.data.data.length) {
+    //check if selected player was active during given season
     summaryElement.innerHTML = `
     <article class="notification is-danger">
       <p class="title">Uh oh!</p>
@@ -157,13 +169,13 @@ const onPlayerSelect = async (
     `;
   } else if (
     //check if data from NBA API is available (temp error handler for production CORS error)
-    !nbaPlayer.data.league.standard ||
-    !nbaTeams.data.league.standard
+    !nbaPlayer ||
+    !nbaTeams
   ) {
     summaryElement.innerHTML = `
     <article class="notification is-danger">
       <p class="title">Uh oh!</p>
-      <p class="subtitle">Error retrieving player data from the ${firstYear}-${secondYear} NBA season.</p>
+      <p class="subtitle">There was an error retrieving player data from the NBA servers. Please try selecting a different season and searching for a player, or try again later.</p>
     </article>
     `;
   } else {

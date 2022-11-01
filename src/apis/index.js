@@ -8,23 +8,22 @@ const nba = axios.create({
   baseURL: "https://data.nba.net/data/10s/prod/v1/",
 });
 
-const errorHandler = (error) => {
+const errorHandler = (error, apiProvider) => {
   if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-    console.log(error.response.data);
-    console.log(error.response.status);
-    console.log(error.response.headers);
+    console.log(
+      `The request was made to ${apiProvider}, but the server responded with a status code ${error.response.status}.`
+    );
+    console.log("Response data: ", error.response.data);
+    console.log("Response headers: ", error.response.headers);
   } else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
-    console.log(error.request);
+    console.log(
+      `The request was made to ${apiProvider}, but no response was received. The following is the XHR instance: `,
+      error.request
+    );
   } else {
     // Something happened in setting up the request that triggered an Error
-    console.log("Error", error.message);
+    console.log("Error: ", error.message);
   }
-  console.log(error.config);
 };
 
 export const bdlPlayersFetch = async (query) => {
@@ -32,7 +31,13 @@ export const bdlPlayersFetch = async (query) => {
     const response = await bdl.get("/players", { params: { search: query } });
     return response.data.data;
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, "balldontlie.io");
+    return [
+      {
+        error:
+          "&#9888;&#65039;&nbsp;There was an error retrieving data from the balldontlie.io servers. Please try again later.",
+      },
+    ];
   }
 };
 
@@ -41,7 +46,7 @@ export const bdlPlayerFetch = async (playerID) => {
     const response = await bdl.get(`players/${playerID}`);
     return response;
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, "balldontlie.io");
   }
 };
 
@@ -52,7 +57,7 @@ export const bdlStatsFetch = async (firstYear, playerID) => {
     );
     return response;
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, "balldontlie.io");
   }
 };
 
@@ -63,7 +68,7 @@ export const nbaPlayersFetch = async (firstYear) => {
     );
     return response;
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, "data.nba.net");
   }
 };
 
@@ -72,6 +77,6 @@ export const nbaTeamsFetch = async () => {
     const response = await nba.get("2022/teams.json");
     return response;
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, "data.nba.net");
   }
 };
