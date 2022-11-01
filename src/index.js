@@ -1,5 +1,11 @@
-import axios from "axios";
 import { createAutoComplete } from "./autoComplete";
+import {
+  bdlPlayersFetch,
+  bdlPlayerFetch,
+  bdlStatsFetch,
+  nbaPlayersFetch,
+  nbaTeamsFetch,
+} from "./apis";
 
 //initialize autocomplete search options
 const autoCompleteConfig = {
@@ -13,15 +19,8 @@ const autoCompleteConfig = {
   },
   async fetchData(searchTerm) {
     //use balldontlie.io API search endpoint
-    const response = await axios.get(
-      "https://www.balldontlie.io/api/v1/players",
-      {
-        params: {
-          search: searchTerm,
-        },
-      }
-    );
-    return response.data.data;
+    const results = await bdlPlayersFetch(searchTerm);
+    return results;
   },
 };
 
@@ -136,28 +135,20 @@ const onPlayerSelect = async (
   secondYear = years[0].value + 1
 ) => {
   //retrieve balldontlie.io player info
-  const bdlResponse = await axios.get(
-    `https://www.balldontlie.io/api/v1/players/${player.id}`
-  );
+  const bdlPlayer = await bdlPlayerFetch(player.id);
 
-  //retrieve balldonlie.io player season averages (only returns stats on last full year)
-  const bdlStatsResponse = await axios.get(
-    `https://www.balldontlie.io/api/v1/season_averages?season=${firstYear}&player_ids[]=${player.id}`
-  );
+  //retrieve balldonlie.io player season averages
+  const bdlStats = await bdlStatsFetch(firstYear, player.id);
 
   //retrieve current list of NBA players from NBA API
-  const nbaPlayerResponse = await axios.get(
-    `https://data.nba.net/data/10s/prod/v1/${firstYear}/players.json`
-  );
+  const nbaPlayer = await nbaPlayersFetch(firstYear);
 
   //retrieve current list of NBA teams from NBA API
   //year does not matter since team codes stay the same
-  const nbaTeamsResponse = await axios.get(
-    `https://data.nba.net/data/10s/prod/v1/2022/teams.json`
-  );
+  const nbaTeams = await nbaTeamsFetch();
 
   //check for active player selection
-  if (!bdlStatsResponse.data.data.length) {
+  if (!bdlStats.data.data.length) {
     summaryElement.innerHTML = `
     <article class="notification is-danger">
       <p class="title">Uh oh!</p>
@@ -166,8 +157,8 @@ const onPlayerSelect = async (
     `;
   } else if (
     //check if data from NBA API is available (temp error handler for production CORS error)
-    !nbaPlayerResponse.data.league.standard ||
-    !nbaTeamsResponse.data.league.standard
+    !nbaPlayer.data.league.standard ||
+    !nbaTeams.data.league.standard
   ) {
     summaryElement.innerHTML = `
     <article class="notification is-danger">
@@ -178,17 +169,17 @@ const onPlayerSelect = async (
   } else {
     //populate column with player info
     summaryElement.innerHTML = playerTemplate(
-      bdlResponse.data,
-      bdlStatsResponse.data.data[0],
-      nbaPlayerResponse.data.league.standard,
-      nbaTeamsResponse.data.league.standard
+      bdlPlayer.data,
+      bdlStats.data.data[0],
+      nbaPlayer.data.league.standard,
+      nbaTeams.data.league.standard
     );
 
     //choose which side the player appears on
     if (side === "left") {
-      leftPlayer = bdlResponse.data;
+      leftPlayer = bdlPlayer.data;
     } else {
-      rightPlayer = bdlResponse.data;
+      rightPlayer = bdlPlayer.data;
     }
 
     //run comparison only when two players are selected
