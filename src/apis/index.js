@@ -63,9 +63,7 @@ export const bdlStatsFetch = async (firstYear, playerID) => {
 
 export const nbaPlayersFetch = async (firstYear) => {
   try {
-    const response = await nba.get(
-      `https://data.nba.net/data/10s/prod/v1/${firstYear}/players.json`
-    );
+    const response = await nba.get(`${firstYear}/players.json`);
     return response;
   } catch (error) {
     errorHandler(error, "data.nba.net");
