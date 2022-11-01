@@ -164,6 +164,17 @@ const onPlayerSelect = async (
       <p class="subtitle">Please select a player who played in the ${firstYear}-${secondYear} NBA season.</p>
     </article>
     `;
+  } else if (
+    //check if data from NBA API is available (temp error handler for production CORS error)
+    !nbaPlayerResponse.data.league.standard ||
+    !nbaTeamsResponse.data.league.standard
+  ) {
+    summaryElement.innerHTML = `
+    <article class="notification is-danger">
+      <p class="title">Uh oh!</p>
+      <p class="subtitle">Error retrieving player data from the ${firstYear}-${secondYear} NBA season.</p>
+    </article>
+    `;
   } else {
     //populate column with player info
     summaryElement.innerHTML = playerTemplate(
