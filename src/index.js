@@ -175,7 +175,7 @@ const onPlayerSelect = async (
     summaryElement.innerHTML = `
     <article class="notification is-danger">
       <p class="title">Uh oh!</p>
-      <p class="subtitle">There was an error retrieving player data from the NBA servers. Please try selecting a different season and searching for a player, or try again later.</p>
+      <p class="subtitle">There was an error retrieving player data from the NBA servers. Please try selecting a different season and search for a player, or try again later.</p>
     </article>
     `;
   } else {
