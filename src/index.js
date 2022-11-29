@@ -183,8 +183,10 @@ const onPlayerSelect = async (
     summaryElement.innerHTML = playerTemplate(
       bdlPlayer.data,
       bdlStats.data.data[0],
-      nbaPlayer.data.league.standard,
-      nbaTeams.data.league.standard
+      // nbaPlayer.data.league.standard,
+      // nbaTeams.data.league.standard,
+      nbaPlayer.league.standard,
+      nbaTeams.league.standard
     );
 
     //choose which side the player appears on
@@ -250,7 +252,7 @@ let nbaHeightFt;
 let nbaHeightIn;
 let nbaWeight;
 let nbaTeamName;
-let nbaTeamAbbr;
+let nbaTeamCode;
 
 const playerTemplate = (
   bdlPlayerDetail,
@@ -282,7 +284,7 @@ const playerTemplate = (
     if (nbaTeamDetail[i].teamId === nbaTeamID) {
       {
         nbaTeamName = nbaTeamDetail[i].fullName;
-        nbaTeamAbbr = nbaTeamDetail[i].tricode;
+        nbaTeamCode = nbaTeamDetail[i].teamId;
       }
     }
   }
@@ -307,7 +309,7 @@ const playerTemplate = (
           <h4>${bdlPlayerDetail.first_name} ${bdlPlayerDetail.last_name}</h4>
           <p class="team">${nbaTeamName} 
           <span class="icon is-medium">
-            <img src="https://www.nba.com/.element/img/1.0/teamsites/logos/teamlogos_500x500/${nbaTeamAbbr.toLowerCase()}.png"></i>
+            <img src="https://cdn.nba.com/logos/nba/${nbaTeamCode}/primary/D/logo.svg"></i>
           </span>
         </p>
           <p>#${nbaJerseyNo} | ${bdlPlayerDetail.position}</p>

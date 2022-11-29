@@ -1,4 +1,5 @@
 import axios from "axios";
+import teamData from "../data/teams.json";
 
 const bdl = axios.create({
   baseURL: "https://www.balldontlie.io/api/v1/",
@@ -61,20 +62,40 @@ export const bdlStatsFetch = async (firstYear, playerID) => {
   }
 };
 
-export const nbaPlayersFetch = async (firstYear) => {
-  try {
-    const response = await nba.get(`${firstYear}/players.json`);
-    return response;
-  } catch (error) {
-    errorHandler(error, "data.nba.net");
-  }
+export const nbaPlayersFetch = async (selectedYear) => {
+  // try {
+  //   const response = await nba.get(`${selectedYear}/players.json`);
+  //   return response;
+  // } catch (error) {
+  //   errorHandler(error, "data.nba.net");
+  // }
+
+  let playerData;
+
+  let { p2016, p2017, p2018, p2019, p2020, p2021, p2022 } = await import(
+    "../data/players"
+  );
+
+  const obj = {
+    p2016,
+    p2017,
+    p2018,
+    p2019,
+    p2020,
+    p2021,
+    p2022,
+  };
+
+  playerData = obj[`p${selectedYear}`];
+  return playerData;
 };
 
 export const nbaTeamsFetch = async () => {
-  try {
-    const response = await nba.get("2022/teams.json");
-    return response;
-  } catch (error) {
-    errorHandler(error, "data.nba.net");
-  }
+  // try {
+  //   const response = await nba.get("2022/teams.json");
+  //   return response;
+  // } catch (error) {
+  //   errorHandler(error, "data.nba.net");
+  // }
+  return teamData;
 };
